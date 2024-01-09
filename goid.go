@@ -1,8 +1,9 @@
 package gls
 
 import (
-	"github.com/modern-go/reflect2"
 	"unsafe"
+
+	"github.com/modern-go/reflect2"
 )
 
 // offset for go1.4
@@ -18,6 +19,9 @@ func init() {
 }
 
 // GoID returns the goroutine id of current goroutine
+//
+//go:nosplit
+//go:norace
 func GoID() int64 {
 	g := getg()
 	p_goid := (*int64)(unsafe.Pointer(g + goidOffset))
